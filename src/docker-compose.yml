@@ -1,0 +1,12 @@
+name: pacman-cache-dev
+
+services:
+  pacman-cache:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    volumes:
+      - ./list.txt:/etc/pacman.d/cachelist:ro
+      - ./cache/:/home/root/cache/
+    ports:
+      - "8000:8000"
