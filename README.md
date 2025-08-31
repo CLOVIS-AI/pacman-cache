@@ -1,15 +1,13 @@
-# Playground: Baseline
+# Container-based pacman cache
 
-<!-- When using the Playground to bootstrap a project, replace this by your project description. -->
-This a template to easily bootstrap your projects.
+Do you have multiple ArchLinux installations and are tired that installation is slow because the mirrors are overloaded?
 
-> This project is part of the OpenSavvy Playground.
-> To learn more, visit [this page](docs/playground/README.md).
+This project lets you pre-download the packages you use most in a container, then all your installations can pull from the container on your own infrastructure.
 
 ## License
 
-<!-- Mentions under which license you are publishing the project. -->
-<!-- Add the full text to the LICENSE file. -->
+This project is licensed under the GNU Affero General Public License, version 3.
+The full text is available in the [LICENSE.txt] file.
 
 ## Contributing
 
