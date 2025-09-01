@@ -50,5 +50,5 @@ while true; do
 	echo "Sleeping until next update…"
 	echo
 
-	sleep 500
+	sleep 72000 # 20h
 done
