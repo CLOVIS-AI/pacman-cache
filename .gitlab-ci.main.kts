@@ -5,6 +5,8 @@
 
 import opensavvy.gitlab.ci.*
 import opensavvy.gitlab.ci.Environment.EnvironmentTier.Development
+import opensavvy.gitlab.ci.plugins.Kaniko.Companion.kanikoBuild
+import opensavvy.gitlab.ci.plugins.Kaniko.Companion.kanikoRename
 import opensavvy.gitlab.ci.script.shell
 
 /**
@@ -26,6 +28,33 @@ gitlabCi {
 	val build by stage()
 	val test by stage()
 	val deploy by stage()
+
+	val imageName = Variable.Registry.image
+
+	val buildDocker by kanikoBuild(
+		imageName = imageName,
+		context = "src",
+		stage = build,
+	)
+
+	if (Value.isDefaultBranch) {
+		val publishLatestDocker by kanikoRename(
+			imageName = imageName,
+			stage = deploy,
+		) {
+			dependsOn(buildDocker)
+		}
+	}
+
+	if (Value.isTag) {
+		val publishTagDocker by kanikoRename(
+			imageName = imageName,
+			stage = deploy,
+			newVersion = Value.Commit.tag!!,
+		) {
+			dependsOn(buildDocker)
+		}
+	}
 
 	// region Documentation
 
